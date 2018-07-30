@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+
+
+  <div id="app">
+
+    <my-header v-bind:content="meuTitulo"></my-header>
+
+    <input type="text" v-model="meuTitulo">
+    <br><br>
+
+    <my-table v-bind:headers="['nome', 'email', 'valor']" v-bind:items="items"></my-table>
+
+    <p v-once>{{meuTitulo}}</p>
+
+    <p v-html="html">{{html}}</p>
+
+    <p>{{23.2172432422 | moeda}}</p>
+
+
+    <ul>
+      <li v-for="item in items">
+        mp
+      </li>
+    </ul>
+
+
+  </div>
+
+
+
+
+
+  <script type="text/javascript">
+
+    Vue.component('my-header', {
+      template: '<h2>{{content}}</h2>',
+      props: ['content']
+    });
+
+    Vue.component('my-table', {
+      props: ['headers', 'items'],
+      template: '<table style="width: 100%; border: 1px solid black">' +
+          '<thead>' +
+            '<tr>' +
+              '<th v-for="header in headers">{{header}}</th>' +
+            '</tr>' +
+          '</thead>' +
+          '<tbody>' +
+          '<tr v-for="item in items">' +
+              '<td v-for="col in item">{{col}}</td>' +
+            '</tr>' +
+          '</tbody>' +
+        '</table>'
+    });
+
+
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        meuTitulo: "teste component",
+        items: [
+          {nome: 'zé', email:'adads@asda', valor: 54.4861},
+          {nome: 'aerae', email:'etrwtree@asda', valor: 54.4861}
+        ],
+        html: '<a href="#">link</a>',
+      },
+      filters: {
+        moeda: function (val) {
+          return 'R$' + (val).toFixed(2).replace('.',',');
+        }
+      }
+    });
+
+  </script>
+  </body>
+</html>

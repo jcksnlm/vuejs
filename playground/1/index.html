@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+
+  <div id="app">
+
+    {{msg}}
+
+    <p v-bind:title="myTitle">teste title</p>
+
+    <p v-if="condition">teste if</p>
+
+    <p v-for="item in items">{{item.title}}</p>
+
+    <button v-if="!clicked" v-on:click="click()">save</button>
+    <button v-if="clicked" disabled>aguarde...</button>
+    <br><br>
+    <input type="text" v-model="usuario.nome">
+    <p>{{usuario.nome}}</p>
+  </div>
+
+
+
+
+
+
+  <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data: {
+        msg: "huehu",
+        myTitle: "esse é o title",
+        condition: true,
+        items: [
+          {title: "item1"},
+          {title: "item2"},
+          {title: "item3"},
+        ],
+        clicked: false,
+        usuario: {
+          nome: ""
+        }
+      },
+      methods: {
+        click: function (e) {
+          this.clicked = true;
+        }
+      }
+    });
+
+  </script>
+  </body>
+</html>
