@@ -26,11 +26,19 @@
 
     <ul>
       <li v-for="item in items">
-        mp
+          {{item.nome}} - {{item.email}} - {{item.valor | moeda}}
       </li>
     </ul>
 
+    <p>total: {{total() | moeda}}</p>
+    <p>{{totalCounts}}</p><br>
+    <p>totalComputed: {{totalComputed | moeda}}</p>
+    <p>{{totalCountsComputed}}</p>
 
+    <p>
+        <input type="text" v-model="nome">
+    </p>
+    <p>alterações: {{countAlters}}</p>
   </div>
 
 
@@ -60,23 +68,53 @@
         '</table>'
     });
 
-
-
     var app = new Vue({
-      el: '#app',
-      data: {
-        meuTitulo: "teste component",
-        items: [
-          {nome: 'zé', email:'adads@asda', valor: 54.4861},
-          {nome: 'aerae', email:'etrwtree@asda', valor: 54.4861}
-        ],
-        html: '<a href="#">link</a>',
-      },
-      filters: {
-        moeda: function (val) {
-          return 'R$' + (val).toFixed(2).replace('.',',');
+        el: '#app',
+        data: {
+            meuTitulo: "teste component",
+            items: [
+                {nome: 'zé', email:'adads@asda', valor: 54.4861},
+                {nome: 'aerae', email:'etrwtree@asda', valor: 54.4861}
+            ],
+            html: '<a href="#">link</a>',
+            totalCounts: 0,
+            totalCountsComputed: 0,
+            nome : "",
+            countAlters: 0,
+        },
+        filters: {
+            moeda: function (val) {
+                return 'R$' + (val).toFixed(2).replace('.',',');
+            }
+        },
+        methods: {
+            total: function () {
+                var total = 0;
+
+                this.items.forEach(function (item) {
+                    total += item.valor;
+                });
+                //this.totalCounts++;
+                return total;
+            }
+        },
+        computed: {
+            totalComputed: function () {
+                var total = 0;
+
+                this.items.forEach(function (item) {
+                    total += item.valor;
+                });
+                this.totalCountsComputed++;
+                return total;
+            }
+        },
+        watch: {
+            nome: function (newVal) {
+                this.countAlters++;
+                this.nome = newVal.toUpperCase();
+            }
         }
-      }
     });
 
   </script>

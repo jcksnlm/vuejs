@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+
+
+  <div id="app">
+
+    <my-header content="formularios"></my-header>
+
+    <p>texto: {{texto}}</p>
+    <p>
+        <input type="text" v-model="texto">
+    </p>
+
+    <p>textarea: {{textarea}}</p>
+    <p style="white-space: pre-line">texto: {{textarea}}</p>
+    <p>
+        <textarea v-model="textarea"></textarea>
+    </p>
+
+
+    <p>checkbox</p>
+    <input type="checkbox" id="aceitaTermos" v-model="accept">
+    <label for="aceitaTermos">Aceitar os termos >> {{accept}}</label>
+
+    <p>multiplos checkbox</p>
+    <input type="checkbox" id="check1" value="check1Checked" v-model="checks">check1 <br>
+    <input type="checkbox" id="check2" value="check2Checked" v-model="checks">check2
+    <p>{{checks}}</p>
+
+
+    <p>radios:</p>
+    <p>
+        <input type="radio" id="radio1" value="radio1Selected" v-model="radios"> radio 1 <br>
+        <input type="radio" id="radio2" value="radio2Selected" v-model="radios"> radio 2 <br>
+        selected: {{radios}}
+    </p>
+
+    <p>selects</p>
+    <select v-model="year">
+        <option value="" disabled>escolha</option>
+        <option value="2001">ano 2001</option>
+        <option value="2002">ano 2002</option>
+    </select>
+    <p>selected {{year}}</p>
+
+    <p> multi selects</p>
+    <select multiple v-model="selectedOptions">
+        <option disabled>escolha</option>
+        <option value="option1">option 1</option>
+        <option value="option2">option 2</option>
+    </select>
+    <p>selected {{selectedOptions}}</p>
+
+    <p>lazy: {{search}}</p>
+    <input type="text" v-model.lazy="search">
+
+
+    <p>number: {{num}} - {{typeof num}}</p>
+    <input type="number" v-model.number="num">
+
+  </div>
+
+
+
+
+
+  <script type="text/javascript">
+
+    Vue.component('my-header', {
+      template: '<h2>{{content}}</h2>',
+      props: ['content']
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            texto: "",
+            textarea: "asdsada",
+            accept: false,
+            checks: [],
+            radios: "radio2Selected",
+            year: null,
+            selectedOptions: [],
+            search: "hue",
+            num: 45
+        },
+    });
+
+  </script>
+  </body>
+</html>
